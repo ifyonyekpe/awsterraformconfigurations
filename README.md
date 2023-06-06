@@ -1,2 +1,2 @@
-# awsterraformconfigurations
-A collection of terraform configuration modules for AWS.
+# Sample IaC configuration for AWS using Terraform
+This repository contains sample configurations for AWS IAC deployment.
