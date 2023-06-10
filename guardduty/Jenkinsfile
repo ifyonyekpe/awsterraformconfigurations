@@ -2,12 +2,12 @@ pipeline {
     agent any
     
     tools {
-        terraform 'jenkins-terraform'
+        terraform 'guardduty'
     }
     stages {
-        stage ("checkout from GIT") {
+        stage ("Get source code") {
             steps {
-                git branch: 'main', credentialsId: 'aa3e80aa-e369-421e-a28e-21c892e2e6da', url: 'https://github.com/BalarajuGolla/CICD-pipeline'
+                git branch: 'main', url: 'https://github.com/ifyonyekpe/awsterraformconfigurations.git'
             }
         }
         stage ("terraform init") {
