@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+    
+    tools {
+        terraform 'guardduty'
+    }
+    stages {
+        stage ("Get source code") {
+            steps {
+                git branch: 'main', url: 'https://github.com/ifyonyekpe/awsterraformconfigurations.git'
+            }
+        }
+        stage ("terraform init") {
+            steps {
+                sh 'terraform init'
+            }
+        }
+        stage ("terraform fmt") {
+            steps {
+                sh 'terraform fmt'
+            }
+        }
+        stage ("terraform validate") {
+            steps {
+                sh 'terraform validate'
+            }
+        }
+        stage ("terrafrom plan") {
+            steps {
+                sh 'terraform plan -out tf.plan'
+            }
+        }
+        stage ("terrafrom show") {
+            steps {
+                sh 'terraform show -no-color tf.plan > tfplan.txt'
+            }
+        }
+        stage ("terraform apply") {
+            steps {
+                sh 'terraform apply -var="access_key=${AWS_ACCESS_KEY}" -var="secret_key=${AWS_SECRET_KEY}" --auto-approve'
+            }
+        }
+    }
+}
