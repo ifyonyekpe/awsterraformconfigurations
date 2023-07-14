@@ -1,0 +1,1 @@
+# Deploy a sample django app using terraform on multiple EC2s attached to an ALB
